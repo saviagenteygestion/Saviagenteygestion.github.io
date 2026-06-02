@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAVIA — Gente y Gestión</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --verde-oscuro: #2d4a2d;
+    --verde-medio: #4a7c4a;
+    --verde-claro: #8ab88a;
+    --verde-suave: #c8dfc8;
+    --crema: #f5f0e8;
+    --crema-oscuro: #ede5d5;
+    --tierra: #8b6914;
+    --texto: #1a2e1a;
+    --texto-suave: #4a5e4a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(138, 184, 138, 0.3);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-size: 0.55rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--verde-medio);
+    text-transform: uppercase;
+    margin-top: -2px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--verde-oscuro); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--verde-oscuro);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 5rem 5rem 5rem;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: 0; bottom: 0;
+    width: 120px;
+    background: var(--verde-oscuro);
+    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%);
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--verde-claro);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--crema);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--verde-claro);
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(245, 240, 232, 0.7);
+    max-width: 380px;
+    margin-bottom: 3rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: var(--crema);
+    color: var(--verde-oscuro);
+    padding: 0.9rem 2.2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    width: fit-content;
+  }
+
+  .btn-primary:hover {
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+  }
+
+  .hero-right {
+    background: var(--crema-oscuro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 4rem 5rem 6rem;
+    position: relative;
+  }
+
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .hero-circle {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, var(--verde-claro), var(--verde-oscuro));
+    opacity: 0.2;
+    position: absolute;
+    top: -40px;
+    right: -20px;
+  }
+
+  .hero-card {
+    background: white;
+    padding: 2.5rem;
+    border-left: 3px solid var(--verde-medio);
+    box-shadow: 20px 20px 60px rgba(45, 74, 45, 0.08);
+    position: relative;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-card p {
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: var(--texto-suave);
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--verde-suave);
+    color: var(--verde-oscuro);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    margin-top: 1.2rem;
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 7rem 4rem;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--verde-medio);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--verde-medio);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--verde-oscuro);
+    margin-bottom: 1.5rem;
+  }
+
+  /* PROPÓSITO */
+  .proposito {
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .proposito-texto p {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--texto-suave);
+    margin-bottom: 1.2rem;
+  }
+
+  .valores-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .valor-item {
+    padding: 1.5rem;
+    border: 1px solid var(--verde-suave);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .valor-item:hover {
+    border-color: var(--verde-medio);
+    transform: translateY(-4px);
+  }
+
+  .valor-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    margin-bottom: 0.5rem;
+  }
+
+  .valor-item p {
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: var(--texto-suave);
+  }
+
+  /* SERVICIOS */
+  .servicios {
+    background: var(--crema);
+    text-align: center;
+  }
+
+  .servicios .section-label { justify-content: center; }
+  .servicios .section-label::before { display: none; }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    text-align: left;
+  }
+
+  .servicio-card {
+    background: white;
+    padding: 2.5rem 2rem;
+    border-top: 2px solid var(--verde-suave);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .servicio-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--verde-medio);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .servicio-card:hover::before { transform: scaleX(1); }
+
+  .servicio-card:hover {
+    box-shadow: 0 20px 50px rgba(45, 74, 45, 0.08);
+  }
+
+  .servicio-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--verde-suave);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .servicio-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .servicio-card p {
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: var(--texto-suave);
+  }
+
+  /* MODALIDADES */
+  .modalidades {
+    background: var(--verde-oscuro);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .modalidad-item {
+    padding: 5rem 4rem;
+    border-right: 1px solid rgba(138, 184, 138, 0.2);
+  }
+
+  .modalidad-item:last-child { border-right: none; }
+
+  .modalidad-item .section-label { color: var(--verde-claro); }
+  .modalidad-item .section-label::before { background: var(--verde-claro); }
+
+  .modalidad-item .section-title { color: var(--crema); font-size: 1.8rem; }
+
+  .modalidad-item ul {
+    list-style: none;
+    margin-top: 2rem;
+  }
+
+  .modalidad-item li {
+    font-size: 0.85rem;
+    color: rgba(245, 240, 232, 0.75);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(138, 184, 138, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .modalidad-item li::before {
+    content: '→';
+    color: var(--verde-claro);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  /* CONTACTO */
+  .contacto {
+    background: var(--crema-oscuro);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .contacto-info p {
+    font-size: 0.92rem;
+    line-height: 1.9;
+    color: var(--texto-suave);
+    margin-bottom: 2.5rem;
+  }
+
+  .contacto-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .contacto-dato {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+  }
+
+  .contacto-dato-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--verde-oscuro);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--crema);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: white;
+    border: 1px solid var(--verde-suave);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--texto);
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--verde-medio);
+  }
+
+  .form-group textarea { height: 120px; resize: vertical; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--verde-medio);
+    margin-bottom: 0.4rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--texto);
+    color: rgba(245, 240, 232, 0.6);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--crema);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .footer-logo span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    color: var(--verde-claro);
+    margin-top: -2px;
+  }
+
+  footer p { font-size: 0.75rem; }
+
+  /* DIVIDER */
+  .leaf-divider {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 1rem;
+    background: white;
+    color: var(--verde-medio);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.25s; }
+  .hero-desc { animation-delay: 0.4s; }
+  .btn-primary { animation-delay: 0.55s; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .hero-left {
+      padding: 7rem 2rem 3rem;
+    }
+
+    .hero-left::after { display: none; }
+    .hero-right { padding: 3rem 2rem; }
+
+    section { padding: 4rem 1.5rem; }
+
+    .proposito,
+    .servicios-grid,
+    .modalidades,
+    .contacto {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .modalidad-item {
+      padding: 3rem 1.5rem;
+      border-right: none;
+      border-bottom: 1px solid rgba(138, 184, 138, 0.2);
+    }
+
+    .valores-grid { grid-template-columns: 1fr; }
+
+    footer {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    SAVIA
+    <span>Gente y Gestión</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#proposito">Propósito</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#modalidades">Cómo trabajamos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Paraguay · Argentina</p>
+    <h1 class="hero-title">
+      Gestión<br>
+      <em>humana</em><br>
+      con propósito
+    </h1>
+    <p class="hero-desc">
+      Como la savia en un árbol, las personas son la energía que sostiene, nutre y hace evolucionar a toda organización. Acompañamos a tu empresa desde adentro.
+    </p>
+    <a href="#contacto" class="btn-primary">Hablemos</a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-circle"></div>
+      <div class="hero-card">
+        <div class="hero-card-icon">🌿</div>
+        <h3>Crecimiento desde adentro</h3>
+        <p>Disminuimos conflictos, ordenamos estructuras, potenciamos personas y fortalecemos empresas.</p>
+        <span class="hero-tag">Gestión Integral de Capital Humano</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPÓSITO -->
+<section class="proposito" id="proposito">
+  <div class="proposito-texto">
+    <p class="section-label">Nuestro propósito</p>
+    <h2 class="section-title">En SAVIA creemos que cada empresa crece desde adentro</h2>
+    <p>Acompañamos a las empresas en cada etapa del vínculo con sus colaboradores: desde el ingreso y la organización de su documentación, hasta el seguimiento cercano de las dinámicas internas y el acompañamiento humano.</p>
+    <p>No somos sólo Recursos Humanos. No somos sólo asesoría. Somos gestión humana con mirada estructural y con propósito.</p>
+    <p>Fortalecemos procesos para que el equipo evolucione con bases sólidas. Trabajamos preventivamente — intervenimos antes de que el conflicto escale.</p>
+  </div>
+  <div class="valores-grid">
+    <div class="valor-item">
+      <h4>Prevención antes que reacción</h4>
+      <p>Intervenimos antes de que el conflicto escale.</p>
+    </div>
+    <div class="valor-item">
+      <h4>Estructura con humanidad</h4>
+      <p>Ordenamos procesos sin perder cercanía.</p>
+    </div>
+    <div class="valor-item">
+      <h4>Claridad y simplicidad</h4>
+      <p>Implementamos soluciones prácticas y concretas.</p>
+    </div>
+    <div class="valor-item">
+      <h4>Compromiso real</h4>
+      <p>Acompañamos entendiendo la dinámica propia de cada organización.</p>
+    </div>
+  </div>
+</section>
+
+<div class="leaf-divider">🌿</div>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <p class="section-label">¿Qué hacemos?</p>
+  <h2 class="section-title">Gestión integral del capital humano</h2>
+  <div class="servicios-grid">
+    <div class="servicio-card">
+      <div class="servicio-num">01</div>
+      <h3>Organización y Administración</h3>
+      <p>Diseñamos y estructuramos el proceso de incorporación y documentación laboral de tu empresa.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-num">02</div>
+      <h3>Prevención y Resolución de Conflictos</h3>
+      <p>Gestionamos el comportamiento organizacional a través de procesos disciplinarios claros, acompañando el armado de reglamento interno con criterio jurídico y humano.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-num">03</div>
+      <h3>Implementación y Mejora de Procesos</h3>
+      <p>Ordenamos áreas, definimos roles y optimizamos circuitos administrativos y operativos para que la empresa funcione con mayor claridad.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-num">04</div>
+      <h3>Reclutamiento y Selección</h3>
+      <p>Buscamos e incorporamos perfiles alineados a la cultura y necesidades de cada organización.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-num">05</div>
+      <h3>Desarrollo, Capacitación y Cultura</h3>
+      <p>Generamos espacios de crecimiento y programas de entrenamiento, potenciando el talento y promoviendo entornos laborales saludables y productivos.</p>
+    </div>
+    <div class="servicio-card" style="background: var(--verde-suave); display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--verde-oscuro); line-height:1.5; font-style:italic;">
+        "Cuando el equipo está nutrido y organizado, la empresa crece con fuerza."
+      </p>
+      <a href="#contacto" class="btn-primary" style="margin-top:1.5rem; background: var(--verde-oscuro); color: var(--crema);">Consultar</a>
+    </div>
+  </div>
+</section>
+
+<!-- MODALIDADES -->
+<section class="modalidades" id="modalidades">
+  <div class="modalidad-item">
+    <p class="section-label">Modalidad 1</p>
+    <h2 class="section-title">Abono Mensual Integral</h2>
+    <ul>
+      <li>Seguimiento de situaciones laborales</li>
+      <li>Asesoramiento preventivo continuo</li>
+      <li>Control documental</li>
+      <li>Soporte estratégico</li>
+    </ul>
+  </div>
+  <div class="modalidad-item">
+    <p class="section-label">Modalidad 2</p>
+    <h2 class="section-title">Servicios Particulares</h2>
+    <ul>
+      <li>Implementación de procesos específicos</li>
+      <li>Reclutamiento y selección</li>
+      <li>Capacitaciones y charlas</li>
+      <li>Procesos de desempeño y desarrollo</li>
+      <li>Desarrollo de procesos por área</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <div class="contacto-info">
+    <p class="section-label">Contacto</p>
+    <h2 class="section-title">¿Hablamos?</h2>
+    <p>Cada propuesta se adapta a la estructura y tamaño de tu empresa. Contanos tu situación y encontramos juntos la mejor forma de acompañarte.</p>
+    <div class="contacto-datos">
+      <div class="contacto-dato">
+        <div class="contacto-dato-icon">✉</div>
+        <span>saviagenteygestion@gmail.com</span>
+      </div>
+      <div class="contacto-dato">
+        <div class="contacto-dato-icon">🌍</div>
+        <span>Paraguay · Argentina</span>
+      </div>
+    </div>
+  </div>
+  <div class="contacto-form">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" placeholder="Tu nombre">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="tu@email.com">
+    </div>
+    <div class="form-group">
+      <label>País</label>
+      <select>
+        <option value="">Seleccioná tu país</option>
+        <option>Paraguay</option>
+        <option>Argentina</option>
+        <option>Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Mensaje</label>
+      <textarea placeholder="Contanos sobre tu empresa y en qué podemos ayudarte…"></textarea>
+    </div>
+    <a href="mailto:saviagenteygestion@gmail.com" class="btn-primary" style="background: var(--verde-oscuro); color: var(--crema); text-align:center;">
+      Enviar mensaje
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    SAVIA
+    <span>Gente y Gestión</span>
+  </div>
+  <p>saviagenteygestion@gmail.com · Paraguay · Argentina</p>
+  <p style="font-size:0.7rem;">© 2025 SAVIA. Todos los derechos reservados.</p>
+</footer>
+
+</body>
+</html>
