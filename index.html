@@ -6,596 +6,276 @@
 <title>SAVIA — Gente y Gestión</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --verde-oscuro: #2d4a2d;
-    --verde-medio: #4a7c4a;
-    --verde-claro: #8ab88a;
-    --verde-suave: #c8dfc8;
-    --crema: #f5f0e8;
-    --crema-oscuro: #ede5d5;
-    --tierra: #8b6914;
-    --texto: #1a2e1a;
-    --texto-suave: #4a5e4a;
-  }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--crema);
-    color: var(--texto);
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 4rem;
-    background: rgba(245, 240, 232, 0.92);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(138, 184, 138, 0.3);
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--verde-oscuro);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  .nav-logo span {
-    display: block;
-    font-size: 0.55rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    letter-spacing: 0.3em;
-    color: var(--verde-medio);
-    text-transform: uppercase;
-    margin-top: -2px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--texto-suave);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--verde-oscuro); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-left {
-    background: var(--verde-oscuro);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 5rem 5rem 5rem;
-    position: relative;
-  }
-
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    right: -60px;
-    top: 0; bottom: 0;
-    width: 120px;
-    background: var(--verde-oscuro);
-    clip-path: polygon(0 0, 50% 0, 100% 50%, 50% 100%, 0 100%);
-    z-index: 2;
-  }
-
-  .hero-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--verde-claro);
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 5vw, 5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    color: var(--crema);
-    margin-bottom: 2rem;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--verde-claro);
-  }
-
-  .hero-desc {
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: rgba(245, 240, 232, 0.7);
-    max-width: 380px;
-    margin-bottom: 3rem;
-  }
-
-  .btn-primary {
-    display: inline-block;
-    background: var(--crema);
-    color: var(--verde-oscuro);
-    padding: 0.9rem 2.2rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    font-weight: 500;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-    width: fit-content;
-  }
-
-  .btn-primary:hover {
-    background: var(--verde-claro);
-    color: var(--verde-oscuro);
-  }
-
-  .hero-right {
-    background: var(--crema-oscuro);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 4rem 5rem 6rem;
-    position: relative;
-  }
-
-  .hero-visual {
-    position: relative;
-    width: 100%;
-    max-width: 340px;
-  }
-
-  .hero-circle {
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 40% 35%, var(--verde-claro), var(--verde-oscuro));
-    opacity: 0.2;
-    position: absolute;
-    top: -40px;
-    right: -20px;
-  }
-
-  .hero-card {
-    background: white;
-    padding: 2.5rem;
-    border-left: 3px solid var(--verde-medio);
-    box-shadow: 20px 20px 60px rgba(45, 74, 45, 0.08);
-    position: relative;
-    z-index: 1;
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-  }
-
-  .hero-card-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--verde-oscuro);
-    margin-bottom: 0.8rem;
-  }
-
-  .hero-card p {
-    font-size: 0.82rem;
-    line-height: 1.75;
-    color: var(--texto-suave);
-  }
-
-  .hero-tag {
-    display: inline-block;
-    background: var(--verde-suave);
-    color: var(--verde-oscuro);
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.8rem;
-    margin-top: 1.2rem;
-  }
-
-  /* SECTION BASE */
-  section {
-    padding: 7rem 4rem;
-  }
-
-  .section-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--verde-medio);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 30px;
-    height: 1px;
-    background: var(--verde-medio);
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3.5vw, 3.2rem);
-    font-weight: 300;
-    line-height: 1.2;
-    color: var(--verde-oscuro);
-    margin-bottom: 1.5rem;
-  }
-
-  /* PROPÓSITO */
-  .proposito {
-    background: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-
-  .proposito-texto p {
-    font-size: 0.92rem;
-    line-height: 1.9;
-    color: var(--texto-suave);
-    margin-bottom: 1.2rem;
-  }
-
-  .valores-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-  }
-
-  .valor-item {
-    padding: 1.5rem;
-    border: 1px solid var(--verde-suave);
-    transition: border-color 0.3s, transform 0.3s;
-  }
-
-  .valor-item:hover {
-    border-color: var(--verde-medio);
-    transform: translateY(-4px);
-  }
-
-  .valor-item h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--verde-oscuro);
-    margin-bottom: 0.5rem;
-  }
-
-  .valor-item p {
-    font-size: 0.78rem;
-    line-height: 1.6;
-    color: var(--texto-suave);
-  }
-
-  /* SERVICIOS */
-  .servicios {
-    background: var(--crema);
-    text-align: center;
-  }
-
-  .servicios .section-label { justify-content: center; }
-  .servicios .section-label::before { display: none; }
-
-  .servicios-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 4rem;
-    text-align: left;
-  }
-
-  .servicio-card {
-    background: white;
-    padding: 2.5rem 2rem;
-    border-top: 2px solid var(--verde-suave);
-    transition: border-color 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .servicio-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--verde-medio);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-
-  .servicio-card:hover::before { transform: scaleX(1); }
-
-  .servicio-card:hover {
-    box-shadow: 0 20px 50px rgba(45, 74, 45, 0.08);
-  }
-
-  .servicio-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 300;
-    color: var(--verde-suave);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-
-  .servicio-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--verde-oscuro);
-    margin-bottom: 1rem;
-    line-height: 1.3;
-  }
-
-  .servicio-card p {
-    font-size: 0.82rem;
-    line-height: 1.75;
-    color: var(--texto-suave);
-  }
-
-  /* MODALIDADES */
-  .modalidades {
-    background: var(--verde-oscuro);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-
-  .modalidad-item {
-    padding: 5rem 4rem;
-    border-right: 1px solid rgba(138, 184, 138, 0.2);
-  }
-
-  .modalidad-item:last-child { border-right: none; }
-
-  .modalidad-item .section-label { color: var(--verde-claro); }
-  .modalidad-item .section-label::before { background: var(--verde-claro); }
-
-  .modalidad-item .section-title { color: var(--crema); font-size: 1.8rem; }
-
-  .modalidad-item ul {
-    list-style: none;
-    margin-top: 2rem;
-  }
-
-  .modalidad-item li {
-    font-size: 0.85rem;
-    color: rgba(245, 240, 232, 0.75);
-    padding: 0.7rem 0;
-    border-bottom: 1px solid rgba(138, 184, 138, 0.15);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .modalidad-item li::before {
-    content: '→';
-    color: var(--verde-claro);
-    font-size: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  /* CONTACTO */
-  .contacto {
-    background: var(--crema-oscuro);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: center;
-  }
-
-  .contacto-info p {
-    font-size: 0.92rem;
-    line-height: 1.9;
-    color: var(--texto-suave);
-    margin-bottom: 2.5rem;
-  }
-
-  .contacto-datos {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .contacto-dato {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.85rem;
-    color: var(--texto-suave);
-  }
-
-  .contacto-dato-icon {
-    width: 36px;
-    height: 36px;
-    background: var(--verde-oscuro);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--crema);
-    font-size: 0.8rem;
-    flex-shrink: 0;
-  }
-
-  .contacto-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    width: 100%;
-    padding: 1rem 1.2rem;
-    background: white;
-    border: 1px solid var(--verde-suave);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    color: var(--texto);
-    outline: none;
-    transition: border-color 0.3s;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus {
-    border-color: var(--verde-medio);
-  }
-
-  .form-group textarea { height: 120px; resize: vertical; }
-
-  .form-group label {
-    display: block;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--verde-medio);
-    margin-bottom: 0.4rem;
-  }
-
-  /* FOOTER */
-  footer {
-    background: var(--texto);
-    color: rgba(245, 240, 232, 0.6);
-    padding: 3rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    color: var(--crema);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .footer-logo span {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.55rem;
-    letter-spacing: 0.3em;
-    color: var(--verde-claro);
-    margin-top: -2px;
-  }
-
-  footer p { font-size: 0.75rem; }
-
-  /* DIVIDER */
-  .leaf-divider {
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 1rem;
-    background: white;
-    color: var(--verde-medio);
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-left > * {
-    animation: fadeUp 0.8s ease both;
-  }
-
-  .hero-eyebrow { animation-delay: 0.1s; }
-  .hero-title { animation-delay: 0.25s; }
-  .hero-desc { animation-delay: 0.4s; }
-  .btn-primary { animation-delay: 0.55s; }
-
-  /* MOBILE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-
-    .hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-
-    .hero-left {
-      padding: 7rem 2rem 3rem;
-    }
-
-    .hero-left::after { display: none; }
-    .hero-right { padding: 3rem 2rem; }
-
-    section { padding: 4rem 1.5rem; }
-
-    .proposito,
-    .servicios-grid,
-    .modalidades,
-    .contacto {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
-    .modalidad-item {
-      padding: 3rem 1.5rem;
-      border-right: none;
-      border-bottom: 1px solid rgba(138, 184, 138, 0.2);
-    }
-
-    .valores-grid { grid-template-columns: 1fr; }
-
-    footer {
-      flex-direction: column;
-      gap: 1rem;
-      text-align: center;
-      padding: 2rem;
-    }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --terracota: #b85c2a;
+  --terracota-suave: #d4855a;
+  --verde: #7a9080;
+  --verde-suave: #b8c9be;
+  --crema: #f2ece0;
+  --crema-blanco: #faf8f4;
+  --texto: #2e2e2e;
+  --texto-suave: #5a5248;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--crema); color: var(--texto); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 4rem;
+  background: rgba(250,248,244,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,92,42,0.1);
+}
+.nav-logo img { height: 48px; display: block; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--texto-suave); text-decoration: none; transition: color 0.3s; }
+.nav-links a:hover { color: var(--terracota); }
+
+/* ── LEAF SVG ── */
+.leaf-deco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.043;
+}
+.leaf-deco svg { display: block; }
+
+/* ── HERO ── */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; position: relative; }
+.hero-left {
+  background: var(--terracota);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 8rem 5rem 5rem; position: relative; overflow: hidden;
+}
+.hero-left .leaf-deco { bottom: -20px; right: 20px; opacity: 0.04; }
+.hero-left::after { content: ''; position: absolute; right: -58px; top: 0; bottom: 0; width: 116px; background: var(--terracota); clip-path: polygon(0 0,50% 0,100% 50%,50% 100%,0 100%); z-index: 2; }
+.hero-eyebrow { font-size: 0.63rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(250,248,244,0.65); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 22px; height: 1px; background: rgba(250,248,244,0.45); }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem,4.5vw,5rem); font-weight: 300; line-height: 1.05; color: var(--crema); margin-bottom: 2rem; }
+.hero-title em { font-style: italic; color: rgba(250,248,244,0.8); }
+.hero-desc { font-size: 0.88rem; line-height: 1.88; color: rgba(250,248,244,0.72); max-width: 380px; margin-bottom: 3rem; }
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary { display: inline-block; background: var(--crema); color: var(--terracota); padding: 0.85rem 2.2rem; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: all 0.3s; }
+.btn-primary:hover { background: var(--texto); color: var(--crema); }
+.btn-outline { display: inline-block; border: 1px solid rgba(250,248,244,0.45); color: rgba(250,248,244,0.82); padding: 0.85rem 2.2rem; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+.btn-outline:hover { background: rgba(250,248,244,0.12); }
+.hero-right { background: var(--crema-blanco); display: flex; align-items: center; justify-content: center; padding: 5rem 4rem 5rem 6rem; position: relative; overflow: hidden; }
+.hero-right .leaf-deco { bottom: -30px; right: -20px; opacity: 0.03; }
+.hero-card { background: white; padding: 2.5rem; border-left: 3px solid var(--terracota); box-shadow: 20px 20px 60px rgba(184,92,42,0.09); position: relative; z-index: 1; animation: float 6s ease-in-out infinite; max-width: 340px; width: 100%; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.hero-card-logo { margin-bottom: 1.5rem; }
+.hero-card-logo img { height: 44px; }
+.hero-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--texto); margin-bottom: 0.8rem; }
+.hero-card p { font-size: 0.82rem; line-height: 1.8; color: var(--texto-suave); }
+.hero-tag { display: inline-block; background: var(--verde-suave); color: var(--texto); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.32rem 0.85rem; margin-top: 1.2rem; }
+.hero-stats { display: flex; gap: 2rem; margin-top: 1.8rem; padding-top: 1.8rem; border-top: 1px solid rgba(42,31,26,0.07); }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 600; color: var(--terracota); display: block; }
+.stat-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--texto-suave); }
+
+/* ── SECTIONS ── */
+section { padding: 7rem 4rem; }
+.section-label { font-size: 0.63rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--terracota); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+.section-label::before { content: ''; display: block; width: 28px; height: 1px; background: var(--terracota); }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3.2vw,3rem); font-weight: 300; line-height: 1.2; color: var(--texto); margin-bottom: 1.5rem; }
+
+/* ── PROPOSITO ── */
+.proposito { background: white; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; position: relative; overflow: hidden; }
+.proposito .leaf-deco { right: -10px; top: 50%; transform: translateY(-50%); opacity: 0.025; }
+.proposito-texto p { font-size: 0.9rem; line-height: 1.92; color: var(--texto-suave); margin-bottom: 1.2rem; }
+.valores-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.valor-item { padding: 1.6rem; border: 1px solid var(--verde-suave); background: var(--crema-blanco); transition: all 0.3s; position: relative; overflow: hidden; }
+.valor-item::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--verde); transition: height 0.4s; }
+.valor-item:hover::before { height: 100%; }
+.valor-item:hover { border-color: var(--verde); transform: translateY(-4px); box-shadow: 0 10px 28px rgba(122,144,128,0.1); }
+.valor-item h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--texto); margin-bottom: 0.5rem; }
+.valor-item p { font-size: 0.77rem; line-height: 1.65; color: var(--texto-suave); }
+
+/* ── SERVICIOS ── */
+.servicios { background: var(--crema); text-align: center; position: relative; overflow: hidden; }
+.servicios .leaf-deco { left: -30px; bottom: -20px; opacity: 0.03; }
+.servicios .section-label { justify-content: center; }
+.servicios .section-label::before { display: none; }
+.servicios-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 4rem; text-align: left; }
+.servicio-card { background: white; padding: 2.5rem 2rem; border-top: 2px solid var(--verde-suave); position: relative; overflow: hidden; transition: all 0.3s; }
+.servicio-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--terracota), var(--verde)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+.servicio-card:hover::after { transform: scaleX(1); }
+.servicio-card:hover { box-shadow: 0 18px 45px rgba(184,92,42,0.08); transform: translateY(-4px); }
+.servicio-num { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--verde-suave); line-height: 1; margin-bottom: 1rem; }
+.servicio-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--texto); margin-bottom: 0.9rem; line-height: 1.3; }
+.servicio-card p { font-size: 0.81rem; line-height: 1.78; color: var(--texto-suave); }
+.servicio-destacado { background: var(--terracota) !important; border-top-color: var(--terracota) !important; display: flex; flex-direction: column; justify-content: center; }
+.servicio-destacado::after { display: none; }
+.servicio-destacado p { font-family: 'Cormorant Garamond',serif; font-size: 1.3rem; color: rgba(250,248,244,0.92) !important; line-height: 1.5; font-style: italic; }
+.servicio-destacado .btn-primary { margin-top: 1.5rem; background: var(--crema); color: var(--terracota); }
+
+/* ── BUSQUEDAS ── */
+.busquedas { background: var(--crema-blanco); position: relative; overflow: hidden; }
+.busquedas .leaf-deco { right: -20px; top: 60px; opacity: 0.03; }
+.busquedas-header { text-align: center; margin-bottom: 4rem; }
+.busquedas-header .section-label { justify-content: center; }
+.busquedas-header .section-label::before { display: none; }
+.busquedas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 2rem; }
+.busqueda-card { background: white; overflow: hidden; box-shadow: 0 4px 20px rgba(42,31,26,0.06); transition: all 0.3s; border-top: 3px solid var(--terracota); }
+.busqueda-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(184,92,42,0.1); }
+.busqueda-card-header { background: var(--terracota); padding: 1.2rem 2rem; }
+.busqueda-badge { background: rgba(250,248,244,0.2); color: var(--crema); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.75rem; border: 1px solid rgba(250,248,244,0.28); display: inline-block; }
+.busqueda-card-body { padding: 2rem; }
+.busqueda-puesto { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 600; color: var(--texto); margin-bottom: 0.25rem; line-height: 1.2; }
+.busqueda-sub { font-size: 0.75rem; color: var(--terracota); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.1rem; }
+.busqueda-meta { display: flex; gap: 1.2rem; margin-bottom: 1.3rem; flex-wrap: wrap; }
+.busqueda-meta-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.77rem; color: var(--texto-suave); }
+.busqueda-desc { font-size: 0.82rem; line-height: 1.75; color: var(--texto-suave); margin-bottom: 1.4rem; }
+.busqueda-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.8rem; }
+.busqueda-col h5 { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracota); margin-bottom: 0.6rem; font-weight: 600; }
+.busqueda-col ul { list-style: none; }
+.busqueda-col li { font-size: 0.77rem; color: var(--texto-suave); padding: 0.28rem 0; border-bottom: 1px solid rgba(42,31,26,0.05); display: flex; align-items: flex-start; gap: 0.45rem; line-height: 1.5; }
+.busqueda-col li::before { content: '✓'; color: var(--verde); font-size: 0.68rem; flex-shrink: 0; margin-top: 2px; }
+.busqueda-valora li::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--terracota-suave); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.btn-postular { display: block; background: var(--terracota); color: white; text-align: center; padding: 0.88rem; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; text-decoration: none; transition: background 0.3s; }
+.btn-postular:hover { background: var(--texto); }
+.no-busquedas { text-align: center; padding: 4rem; color: var(--texto-suave); grid-column: 1/-1; }
+.no-busquedas span { font-size: 2.5rem; display: block; margin-bottom: 1rem; opacity: 0.5; }
+
+/* ── MODALIDADES ── */
+.modalidades { background: var(--verde); display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+.modalidades .leaf-deco { right: 40px; bottom: -30px; opacity: 0.04; }
+.modalidad-item { padding: 5rem 4rem; border-right: 1px solid rgba(250,248,244,0.18); }
+.modalidad-item:last-child { border-right: none; }
+.modalidad-item .section-label { color: var(--crema); }
+.modalidad-item .section-label::before { background: var(--crema); }
+.modalidad-item .section-title { color: var(--crema); font-size: 1.75rem; }
+.modalidad-item ul { list-style: none; margin-top: 2rem; }
+.modalidad-item li { font-size: 0.84rem; color: rgba(250,248,244,0.8); padding: 0.72rem 0; border-bottom: 1px solid rgba(250,248,244,0.12); display: flex; align-items: center; gap: 0.8rem; }
+.modalidad-item li::before { content: '→'; color: rgba(250,248,244,0.55); font-size: 0.72rem; flex-shrink: 0; }
+
+/* ── BLOG ── */
+.blog { background: var(--crema); position: relative; overflow: hidden; }
+.blog .leaf-deco { left: -20px; top: 60px; opacity: 0.03; }
+.blog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+.blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px,1fr)); gap: 2rem; }
+.blog-card { background: white; overflow: hidden; box-shadow: 0 4px 18px rgba(42,31,26,0.05); transition: all 0.3s; }
+.blog-card:hover { transform: translateY(-5px); box-shadow: 0 14px 38px rgba(42,31,26,0.09); }
+.blog-card-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+.blog-card-img.c1 { background: linear-gradient(135deg, var(--verde-suave), #d4c5b0); }
+.blog-card-img.c2 { background: linear-gradient(135deg, #e8d5c0, var(--terracota-suave)); }
+.blog-card-img.c3 { background: linear-gradient(135deg, var(--crema), var(--verde-suave)); }
+.blog-card-body { padding: 1.8rem; }
+.blog-fecha { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracota); margin-bottom: 0.55rem; }
+.blog-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--texto); margin-bottom: 0.7rem; line-height: 1.3; }
+.blog-card p { font-size: 0.81rem; line-height: 1.75; color: var(--texto-suave); margin-bottom: 1.1rem; }
+.blog-leer { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracota); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.3s; }
+.blog-leer:hover { gap: 0.8rem; }
+.no-notas { text-align: center; padding: 3.5rem; color: var(--texto-suave); grid-column: 1/-1; }
+.no-notas span { font-size: 2.5rem; display: block; margin-bottom: 1rem; opacity: 0.5; }
+
+/* ── CONTACTO ── */
+.contacto { background: var(--verde-suave); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.contacto .section-label { color: var(--texto); }
+.contacto .section-label::before { background: var(--texto); }
+.contacto .section-title { color: var(--texto); }
+.contacto-info p { font-size: 0.9rem; line-height: 1.9; color: var(--texto-suave); margin-bottom: 2.2rem; }
+.contacto-datos { display: flex; flex-direction: column; gap: 0.9rem; }
+.contacto-dato { display: flex; align-items: center; gap: 0.9rem; font-size: 0.83rem; color: var(--texto-suave); }
+.contacto-dato-icon { width: 36px; height: 36px; background: var(--terracota); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.82rem; flex-shrink: 0; }
+.contacto-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group label { display: block; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texto); margin-bottom: 0.38rem; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.9rem 1.1rem; background: white; border: 1px solid rgba(122,144,128,0.35); font-family: 'DM Sans',sans-serif; font-size: 0.84rem; color: var(--texto); outline: none; transition: border-color 0.3s; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--terracota); }
+.form-group textarea { height: 110px; resize: vertical; }
+.btn-contacto { display: block; background: var(--terracota); color: white; padding: 0.95rem 2rem; font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500; text-decoration: none; text-align: center; transition: background 0.3s; border: none; cursor: pointer; font-family: 'DM Sans',sans-serif; }
+.btn-contacto:hover { background: var(--texto); }
+
+/* ── FOOTER ── */
+footer { background: var(--texto); color: rgba(250,248,244,0.5); padding: 2.5rem 4rem; }
+.footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1.8rem; padding-bottom: 1.8rem; border-bottom: 1px solid rgba(250,248,244,0.09); }
+.footer-logo img { height: 40px; filter: brightness(0) invert(1); opacity: 0.88; }
+.footer-redes { display: flex; gap: 0.75rem; align-items: center; }
+.red-social { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; flex-shrink: 0; }
+.red-social.fb { background: #1877F2; color: white; }
+.red-social.ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: white; }
+.red-social.li { background: #0A66C2; color: white; }
+.red-social.wa { background: #25D366; color: white; }
+.red-social:hover { transform: translateY(-3px) scale(1.08); box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
+.footer-bottom p { font-size: 0.7rem; }
+
+/* ── DIVIDER ── */
+.section-divider { display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 1.8rem 4rem; background: white; }
+.section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--verde-suave)); }
+.section-divider::after { background: linear-gradient(90deg, var(--verde-suave), transparent); }
+
+/* Tiny corner accents - small SVG leaf only in corners, never over text */
+.corner-leaf { position: absolute; pointer-events: none; z-index: 0; }
+.corner-leaf svg { display: block; opacity: 0.08; }
+
+/* ── ADMIN ── */
+.admin-fab { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; width: 48px; height: 48px; border-radius: 50%; background: var(--texto); color: var(--crema); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 18px rgba(0,0,0,0.25); border: none; transition: all 0.3s; }
+.admin-fab:hover { background: var(--terracota); transform: rotate(45deg); }
+.admin-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.48); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+.admin-overlay.open { display: flex; }
+.admin-panel { background: white; width: 100%; max-width: 620px; max-height: 90vh; overflow-y: auto; }
+.admin-panel-header { background: var(--texto); color: var(--crema); padding: 1.4rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; }
+.admin-panel-header h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; letter-spacing: 0.1em; }
+.admin-close { background: none; border: none; color: var(--crema); font-size: 1.5rem; cursor: pointer; line-height: 1; }
+.admin-tabs { display: flex; border-bottom: 2px solid var(--crema); }
+.admin-tab { flex: 1; padding: 0.9rem; background: none; border: none; font-family: 'DM Sans',sans-serif; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; color: var(--texto-suave); transition: all 0.3s; }
+.admin-tab.active { color: var(--terracota); border-bottom: 2px solid var(--terracota); margin-bottom: -2px; }
+.admin-body { padding: 1.8rem 2rem; }
+.admin-section { display: none; }
+.admin-section.active { display: block; }
+.admin-login { text-align: center; padding: 1rem 0; }
+.admin-login p { font-size: 0.84rem; color: var(--texto-suave); margin-bottom: 1.4rem; }
+.admin-form-group { margin-bottom: 0.9rem; }
+.admin-form-group label { display: block; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--texto-suave); margin-bottom: 0.35rem; }
+.admin-form-group input, .admin-form-group textarea, .admin-form-group select { width: 100%; padding: 0.75rem 0.95rem; border: 1px solid rgba(42,31,26,0.14); font-family: 'DM Sans',sans-serif; font-size: 0.83rem; color: var(--texto); outline: none; transition: border-color 0.3s; background: var(--crema-blanco); }
+.admin-form-group input:focus, .admin-form-group textarea:focus { border-color: var(--terracota); }
+.admin-form-group textarea { height: 75px; resize: vertical; }
+.admin-btn { background: var(--terracota); color: white; border: none; padding: 0.78rem 2rem; font-family: 'DM Sans',sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; width: 100%; margin-top: 0.4rem; }
+.admin-btn:hover { background: var(--texto); }
+.admin-list { margin-top: 1.4rem; }
+.admin-list-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: var(--crema-blanco); border: 1px solid rgba(42,31,26,0.07); margin-bottom: 0.5rem; gap: 1rem; }
+.admin-list-item-title { font-size: 0.83rem; font-weight: 500; color: var(--texto); }
+.admin-list-item-sub { font-size: 0.7rem; color: var(--texto-suave); margin-top: 0.15rem; }
+.admin-delete { background: none; border: 1px solid rgba(184,92,42,0.28); color: var(--terracota); padding: 0.3rem 0.75rem; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; flex-shrink: 0; }
+.admin-delete:hover { background: var(--terracota); color: white; }
+.admin-edit { background: none; border: 1px solid rgba(122,144,128,0.4); color: var(--verde); padding: 0.3rem 0.75rem; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; flex-shrink: 0; }
+.admin-edit:hover { background: var(--verde); color: white; }
+.admin-divider { height: 1px; background: var(--crema); margin: 1.4rem 0; }
+.admin-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--texto); margin-bottom: 0.9rem; }
+.admin-msg { font-size: 0.78rem; padding: 0.65rem 1rem; margin-bottom: 0.9rem; display: none; }
+.admin-msg.success { background: var(--verde-suave); color: var(--texto); display: block; }
+.admin-msg.error { background: #fde8e8; color: #c53030; display: block; }
+
+/* ── NOTA MODAL ── */
+.nota-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+.nota-modal.open { display: flex; }
+.nota-modal-inner { background: white; max-width: 660px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 3rem; position: relative; }
+.nota-modal-close { position: absolute; top: 1.1rem; right: 1.4rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--texto-suave); }
+.nota-modal-fecha { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracota); margin-bottom: 0.7rem; }
+.nota-modal-titulo { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 600; color: var(--texto); margin-bottom: 1.4rem; line-height: 1.2; }
+.nota-modal-body { font-size: 0.88rem; line-height: 1.92; color: var(--texto-suave); white-space: pre-wrap; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.hero-left > * { animation: fadeUp 0.8s ease both; }
+.hero-eyebrow{animation-delay:.1s}.hero-title{animation-delay:.25s}.hero-desc{animation-delay:.4s}.hero-btns{animation-delay:.55s}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:7rem 2rem 3rem}
+  .hero-left::after{display:none}
+  .hero-right{padding:3rem 2rem}
+  section{padding:4rem 1.5rem}
+  .proposito,.servicios-grid,.modalidades,.contacto{grid-template-columns:1fr;gap:2.5rem}
+  .modalidad-item{padding:3rem 1.5rem;border-right:none;border-bottom:1px solid rgba(250,248,244,0.18)}
+  .valores-grid,.busqueda-cols{grid-template-columns:1fr}
+  .footer-top,.footer-bottom{flex-direction:column;text-align:center}
+  .section-divider{padding:1.4rem 1.5rem}
+}
 </style>
 </head>
 <body>
@@ -603,13 +283,13 @@
 <!-- NAV -->
 <nav>
   <a href="#inicio" class="nav-logo">
-    SAVIA
-    <span>Gente y Gestión</span>
+    <img src="logo-savia.png" alt="SAVIA Gente y Gestión">
   </a>
   <ul class="nav-links">
     <li><a href="#proposito">Propósito</a></li>
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#modalidades">Cómo trabajamos</a></li>
+    <li><a href="#busquedas">Búsquedas</a></li>
+    <li><a href="#blog">Blog</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
 </nav>
@@ -617,103 +297,77 @@
 <!-- HERO -->
 <section class="hero" id="inicio">
   <div class="hero-left">
-    <p class="hero-eyebrow">Paraguay · Argentina</p>
-    <h1 class="hero-title">
-      Gestión<br>
-      <em>humana</em><br>
-      con propósito
-    </h1>
-    <p class="hero-desc">
-      Como la savia en un árbol, las personas son la energía que sostiene, nutre y hace evolucionar a toda organización. Acompañamos a tu empresa desde adentro.
-    </p>
-    <a href="#contacto" class="btn-primary">Hablemos</a>
+<p class="hero-eyebrow">Paraguay · Argentina</p>
+    <h1 class="hero-title">Gestión<br><em>humana</em><br>con propósito</h1>
+    <p class="hero-desc">Como la savia en un árbol, las personas son la energía que sostiene, nutre y hace evolucionar a toda organización. Acompañamos a tu empresa desde adentro.</p>
+    <div class="hero-btns">
+      <a href="#contacto" class="btn-primary">Hablemos</a>
+      <a href="#busquedas" class="btn-outline">Ver búsquedas</a>
+    </div>
   </div>
   <div class="hero-right">
-    <div class="hero-visual">
-      <div class="hero-circle"></div>
-      <div class="hero-card">
-        <div class="hero-card-icon">🌿</div>
-        <h3>Crecimiento desde adentro</h3>
-        <p>Disminuimos conflictos, ordenamos estructuras, potenciamos personas y fortalecemos empresas.</p>
-        <span class="hero-tag">Gestión Integral de Capital Humano</span>
+<div class="hero-card">
+      <div class="hero-card-logo"><img src="logo-savia.png" alt="SAVIA"></div>
+      <h3>Crecimiento desde adentro</h3>
+      <p>Disminuimos conflictos, ordenamos estructuras, potenciamos personas y fortalecemos empresas.</p>
+      <span class="hero-tag">Gestión Integral de Capital Humano</span>
+      <div class="hero-stats">
+        <div><span class="stat-num">2</span><span class="stat-label">Países</span></div>
+        <div><span class="stat-num">5</span><span class="stat-label">Servicios</span></div>
+        <div><span class="stat-num">∞</span><span class="stat-label">Propósito</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROPÓSITO -->
+<!-- PROPOSITO -->
 <section class="proposito" id="proposito">
-  <div class="proposito-texto">
+<div class="proposito-texto">
     <p class="section-label">Nuestro propósito</p>
     <h2 class="section-title">En SAVIA creemos que cada empresa crece desde adentro</h2>
-    <p>Acompañamos a las empresas en cada etapa del vínculo con sus colaboradores: desde el ingreso y la organización de su documentación, hasta el seguimiento cercano de las dinámicas internas y el acompañamiento humano.</p>
+    <p>Acompañamos a las empresas en cada etapa del vínculo con sus colaboradores: desde el ingreso y la organización de su documentación, hasta el seguimiento cercano de las dinámicas internas.</p>
     <p>No somos sólo Recursos Humanos. No somos sólo asesoría. Somos gestión humana con mirada estructural y con propósito.</p>
-    <p>Fortalecemos procesos para que el equipo evolucione con bases sólidas. Trabajamos preventivamente — intervenimos antes de que el conflicto escale.</p>
+    <p>Fortalecemos procesos para que el equipo evolucione con bases sólidas. Trabajamos preventivamente, intervenimos antes de que el conflicto escale.</p>
   </div>
   <div class="valores-grid">
-    <div class="valor-item">
-      <h4>Prevención antes que reacción</h4>
-      <p>Intervenimos antes de que el conflicto escale.</p>
-    </div>
-    <div class="valor-item">
-      <h4>Estructura con humanidad</h4>
-      <p>Ordenamos procesos sin perder cercanía.</p>
-    </div>
-    <div class="valor-item">
-      <h4>Claridad y simplicidad</h4>
-      <p>Implementamos soluciones prácticas y concretas.</p>
-    </div>
-    <div class="valor-item">
-      <h4>Compromiso real</h4>
-      <p>Acompañamos entendiendo la dinámica propia de cada organización.</p>
-    </div>
+    <div class="valor-item"><h4>Prevención antes que reacción</h4><p>Intervenimos antes de que el conflicto escale.</p></div>
+    <div class="valor-item"><h4>Estructura con humanidad</h4><p>Ordenamos procesos sin perder cercanía.</p></div>
+    <div class="valor-item"><h4>Claridad y simplicidad</h4><p>Implementamos soluciones prácticas y concretas.</p></div>
+    <div class="valor-item"><h4>Compromiso real</h4><p>Acompañamos entendiendo la dinámica propia de cada organización.</p></div>
   </div>
 </section>
 
-<div class="leaf-divider">🌿</div>
+<div class="section-divider"><svg viewBox="0 0 24 40" width="12" height="20" style="opacity:0.35;color:var(--verde)"><path d="M12 38 C12 38 2 28 2 16 C2 6 12 2 12 2 C12 2 22 6 22 16 C22 28 12 38 12 38Z M12 2 L12 38 M12 14 C8 11 4 11 2 13 M12 20 C16 17 20 17 22 19 M12 26 C8 23 5 23 3 25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
 
 <!-- SERVICIOS -->
 <section class="servicios" id="servicios">
-  <p class="section-label">¿Qué hacemos?</p>
+<p class="section-label">¿Qué hacemos?</p>
   <h2 class="section-title">Gestión integral del capital humano</h2>
   <div class="servicios-grid">
-    <div class="servicio-card">
-      <div class="servicio-num">01</div>
-      <h3>Organización y Administración</h3>
-      <p>Diseñamos y estructuramos el proceso de incorporación y documentación laboral de tu empresa.</p>
-    </div>
-    <div class="servicio-card">
-      <div class="servicio-num">02</div>
-      <h3>Prevención y Resolución de Conflictos</h3>
-      <p>Gestionamos el comportamiento organizacional a través de procesos disciplinarios claros, acompañando el armado de reglamento interno con criterio jurídico y humano.</p>
-    </div>
-    <div class="servicio-card">
-      <div class="servicio-num">03</div>
-      <h3>Implementación y Mejora de Procesos</h3>
-      <p>Ordenamos áreas, definimos roles y optimizamos circuitos administrativos y operativos para que la empresa funcione con mayor claridad.</p>
-    </div>
-    <div class="servicio-card">
-      <div class="servicio-num">04</div>
-      <h3>Reclutamiento y Selección</h3>
-      <p>Buscamos e incorporamos perfiles alineados a la cultura y necesidades de cada organización.</p>
-    </div>
-    <div class="servicio-card">
-      <div class="servicio-num">05</div>
-      <h3>Desarrollo, Capacitación y Cultura</h3>
-      <p>Generamos espacios de crecimiento y programas de entrenamiento, potenciando el talento y promoviendo entornos laborales saludables y productivos.</p>
-    </div>
-    <div class="servicio-card" style="background: var(--verde-suave); display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-      <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--verde-oscuro); line-height:1.5; font-style:italic;">
-        "Cuando el equipo está nutrido y organizado, la empresa crece con fuerza."
-      </p>
-      <a href="#contacto" class="btn-primary" style="margin-top:1.5rem; background: var(--verde-oscuro); color: var(--crema);">Consultar</a>
-    </div>
+    <div class="servicio-card"><div class="servicio-num">01</div><h3>Organización y Administración</h3><p>Diseñamos y estructuramos el proceso de incorporación y documentación laboral de tu empresa.</p></div>
+    <div class="servicio-card"><div class="servicio-num">02</div><h3>Prevención y Resolución de Conflictos</h3><p>Gestionamos el comportamiento organizacional a través de procesos disciplinarios claros, con criterio jurídico y humano.</p></div>
+    <div class="servicio-card"><div class="servicio-num">03</div><h3>Implementación y Mejora de Procesos</h3><p>Ordenamos áreas, definimos roles y optimizamos circuitos administrativos y operativos para mayor claridad.</p></div>
+    <div class="servicio-card"><div class="servicio-num">04</div><h3>Reclutamiento y Selección</h3><p>Buscamos e incorporamos perfiles alineados a la cultura y necesidades de cada organización.</p></div>
+    <div class="servicio-card"><div class="servicio-num">05</div><h3>Desarrollo, Capacitación y Cultura</h3><p>Generamos espacios de crecimiento y programas de entrenamiento, promoviendo entornos laborales saludables.</p></div>
+    <div class="servicio-card servicio-destacado"><p>"Cuando el equipo está nutrido y organizado, la empresa crece con fuerza."</p><a href="#contacto" class="btn-primary">Consultar</a></div>
   </div>
 </section>
 
+<!-- BUSQUEDAS -->
+<section class="busquedas" id="busquedas">
+<div class="busquedas-header">
+    <p class="section-label">Oportunidades laborales</p>
+    <h2 class="section-title">Búsquedas activas</h2>
+    <p style="font-size:0.86rem;color:var(--texto-suave);max-width:480px;margin:0 auto">Estas son las posiciones que estamos gestionando actualmente. Postulate enviando tu CV.</p>
+  </div>
+  <div class="busquedas-grid" id="busquedas-grid"></div>
+</section>
+
+<div class="section-divider"><svg viewBox="0 0 24 40" width="12" height="20" style="opacity:0.35;color:var(--verde)"><path d="M12 38 C12 38 2 28 2 16 C2 6 12 2 12 2 C12 2 22 6 22 16 C22 28 12 38 12 38Z M12 2 L12 38 M12 14 C8 11 4 11 2 13 M12 20 C16 17 20 17 22 19 M12 26 C8 23 5 23 3 25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+
 <!-- MODALIDADES -->
 <section class="modalidades" id="modalidades">
-  <div class="modalidad-item">
+<div class="modalidad-item">
     <p class="section-label">Modalidad 1</p>
     <h2 class="section-title">Abono Mensual Integral</h2>
     <ul>
@@ -736,6 +390,17 @@
   </div>
 </section>
 
+<!-- BLOG -->
+<section class="blog" id="blog">
+<div class="blog-header">
+    <div>
+      <p class="section-label">Novedades</p>
+      <h2 class="section-title">Blog SAVIA</h2>
+    </div>
+  </div>
+  <div class="blog-grid" id="blog-grid"></div>
+</section>
+
 <!-- CONTACTO -->
 <section class="contacto" id="contacto">
   <div class="contacto-info">
@@ -743,53 +408,357 @@
     <h2 class="section-title">¿Hablamos?</h2>
     <p>Cada propuesta se adapta a la estructura y tamaño de tu empresa. Contanos tu situación y encontramos juntos la mejor forma de acompañarte.</p>
     <div class="contacto-datos">
-      <div class="contacto-dato">
-        <div class="contacto-dato-icon">✉</div>
-        <span>saviagenteygestion@gmail.com</span>
-      </div>
-      <div class="contacto-dato">
-        <div class="contacto-dato-icon">🌍</div>
-        <span>Paraguay · Argentina</span>
-      </div>
+      <div class="contacto-dato"><div class="contacto-dato-icon">✉</div><span>saviagenteygestion@gmail.com</span></div>
+      <div class="contacto-dato"><div class="contacto-dato-icon">📱</div><span>+595 983 123 456</span></div>
+      <div class="contacto-dato"><div class="contacto-dato-icon">🌍</div><span>Paraguay · Argentina</span></div>
     </div>
   </div>
   <div class="contacto-form">
-    <div class="form-group">
-      <label>Nombre</label>
-      <input type="text" placeholder="Tu nombre">
-    </div>
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" placeholder="tu@email.com">
-    </div>
-    <div class="form-group">
-      <label>País</label>
-      <select>
-        <option value="">Seleccioná tu país</option>
-        <option>Paraguay</option>
-        <option>Argentina</option>
-        <option>Otro</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Mensaje</label>
-      <textarea placeholder="Contanos sobre tu empresa y en qué podemos ayudarte…"></textarea>
-    </div>
-    <a href="mailto:saviagenteygestion@gmail.com" class="btn-primary" style="background: var(--verde-oscuro); color: var(--crema); text-align:center;">
-      Enviar mensaje
-    </a>
+    <div class="form-group"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+    <div class="form-group"><label>Email</label><input type="email" placeholder="tu@email.com"></div>
+    <div class="form-group"><label>País</label><select><option value="">Seleccioná tu país</option><option>Paraguay</option><option>Argentina</option><option>Otro</option></select></div>
+    <div class="form-group"><label>Mensaje</label><textarea placeholder="Contanos sobre tu empresa y en qué podemos ayudarte…"></textarea></div>
+    <a href="mailto:saviagenteygestion@gmail.com" class="btn-contacto">Enviar mensaje</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">
-    SAVIA
-    <span>Gente y Gestión</span>
+  <div class="footer-top">
+    <div class="footer-logo"><img src="logo-savia.png" alt="SAVIA"></div>
+    <div class="footer-redes">
+      <a href="https://www.facebook.com/share/1CsXQGkBrb/?mibextid=wwXIfr" target="_blank" class="red-social fb" title="Facebook">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/saviagenteygestion?igsh=MTNyOTR1ODNpaWd4&utm_source=qr" target="_blank" class="red-social ig" title="Instagram">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/savia-49a3683b7?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" class="red-social li" title="LinkedIn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      </a>
+      <a href="https://wa.me/595983123456" target="_blank" class="red-social wa" title="WhatsApp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <p>saviagenteygestion@gmail.com · +595 983 123 456</p>
   </div>
-  <p>saviagenteygestion@gmail.com · Paraguay · Argentina</p>
-  <p style="font-size:0.7rem;">© 2025 SAVIA. Todos los derechos reservados.</p>
+  <div class="footer-bottom">
+    <p>© 2025 SAVIA Gente y Gestión. Todos los derechos reservados.</p>
+    <p>Paraguay · Argentina</p>
+  </div>
 </footer>
 
+<!-- ADMIN FAB -->
+<button class="admin-fab" onclick="document.getElementById('adminOverlay').classList.add('open')" title="Administrar">⚙</button>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <div class="admin-panel-header">
+      <h3>Panel SAVIA</h3>
+      <button class="admin-close" onclick="closeAdmin()">×</button>
+    </div>
+    <div id="adminLogin" style="padding:2rem">
+      <div class="admin-login">
+        <p>Ingresá la contraseña para administrar el contenido</p>
+        <div class="admin-form-group"><label>Contraseña</label><input type="password" id="adminPass" placeholder="••••••" onkeydown="if(event.key==='Enter')checkPass()"></div>
+        <div class="admin-msg" id="loginMsg"></div>
+        <button class="admin-btn" onclick="checkPass()">Ingresar</button>
+      </div>
+    </div>
+    <div id="adminContent" style="display:none">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab(event,'busquedas')">💼 Búsquedas</button>
+        <button class="admin-tab" onclick="switchTab(event,'blog')">📝 Blog</button>
+      </div>
+      <div class="admin-body">
+        <!-- BUSQUEDAS -->
+        <div class="admin-section active" id="tab-busquedas">
+          <div class="admin-subtitle">Nueva búsqueda</div>
+          <div class="admin-msg" id="busquedaMsg"></div>
+          <div class="admin-form-group"><label>Puesto *</label><input type="text" id="b-puesto" placeholder="Ej: Operador de Tienda de Conveniencia"></div>
+          <div class="admin-form-group"><label>Rubro / Empresa</label><input type="text" id="b-sub" placeholder="Ej: Estaciones de Servicio"></div>
+          <div class="admin-form-group"><label>Zona</label><input type="text" id="b-zona" placeholder="Ej: Asunción y alrededores"></div>
+          <div class="admin-form-group"><label>Descripción breve</label><textarea id="b-desc" placeholder="Buscamos personas proactivas y con vocación de servicio..."></textarea></div>
+          <div class="admin-form-group"><label>Requisitos (uno por línea)</label><textarea id="b-req" placeholder="Educación media completa.&#10;Experiencia previa en el área."></textarea></div>
+          <div class="admin-form-group"><label>Se valora (uno por línea)</label><textarea id="b-val" placeholder="Experiencia en atención al cliente.&#10;Trabajo en equipo."></textarea></div>
+          <input type="hidden" id="b-editando" value="">
+          <button class="admin-btn" id="b-submit-btn" onclick="agregarBusqueda()">+ Publicar búsqueda</button>
+          <button class="admin-btn" id="b-cancel-btn" onclick="cancelarEditBusqueda()" style="display:none;margin-top:0.4rem;background:var(--texto-suave)">✕ Cancelar edición</button>
+          <div class="admin-divider"></div>
+          <div class="admin-subtitle">Publicadas</div>
+          <div class="admin-list" id="admin-busquedas-list"></div>
+        </div>
+        <!-- BLOG -->
+        <div class="admin-section" id="tab-blog">
+          <div class="admin-subtitle">Nueva nota</div>
+          <div class="admin-msg" id="blogMsg"></div>
+          <div class="admin-form-group"><label>Título *</label><input type="text" id="n-titulo" placeholder="Ej: Cómo prevenir conflictos laborales"></div>
+          <div class="admin-form-group"><label>Resumen (tarjeta)</label><input type="text" id="n-resumen" placeholder="Una frase breve que describe la nota..."></div>
+          <div class="admin-form-group"><label>Contenido completo</label><textarea id="n-contenido" style="height:130px" placeholder="Escribí el contenido completo aquí..."></textarea></div>
+          <div class="admin-form-group"><label>Emoji</label><input type="text" id="n-emoji" placeholder="🌿" style="width:72px"></div>
+          <input type="hidden" id="n-editando" value="">
+          <button class="admin-btn" id="n-submit-btn" onclick="agregarNota()">+ Publicar nota</button>
+          <button class="admin-btn" id="n-cancel-btn" onclick="cancelarEditNota()" style="display:none;margin-top:0.4rem;background:var(--texto-suave)">✕ Cancelar edición</button>
+          <div class="admin-divider"></div>
+          <div class="admin-subtitle">Publicadas</div>
+          <div class="admin-list" id="admin-blog-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTA MODAL -->
+<div class="nota-modal" id="notaModal">
+  <div class="nota-modal-inner">
+    <button class="nota-modal-close" onclick="document.getElementById('notaModal').classList.remove('open')">×</button>
+    <p class="nota-modal-fecha" id="modal-fecha"></p>
+    <h2 class="nota-modal-titulo" id="modal-titulo"></h2>
+    <div class="nota-modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const PASS = 'savia2025';
+let busquedas = JSON.parse(localStorage.getItem('savia_busquedas')||'[]');
+let notas = JSON.parse(localStorage.getItem('savia_notas')||'[]');
+const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+
+function checkPass(){
+  const p = document.getElementById('adminPass').value;
+  if(p===PASS){
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminContent').style.display='block';
+    renderAdminLists();
+  } else {
+    showMsg('loginMsg','Contraseña incorrecta','error');
+  }
+}
+function closeAdmin(){
+  document.getElementById('adminOverlay').classList.remove('open');
+  document.getElementById('adminLogin').style.display='block';
+  document.getElementById('adminContent').style.display='none';
+  document.getElementById('adminPass').value='';
+}
+function switchTab(e,tab){
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+}
+
+function agregarBusqueda(){
+  const puesto = document.getElementById('b-puesto').value.trim();
+  if(!puesto){ showMsg('busquedaMsg','El puesto es obligatorio','error'); return; }
+  const editId = Number(document.getElementById('b-editando').value);
+  if(editId){
+    // Modo edición
+    const idx = busquedas.findIndex(b=>b.id===editId);
+    if(idx>-1){
+      busquedas[idx] = { ...busquedas[idx], puesto,
+        sub: document.getElementById('b-sub').value.trim(),
+        zona: document.getElementById('b-zona').value.trim(),
+        desc: document.getElementById('b-desc').value.trim(),
+        req: document.getElementById('b-req').value.trim().split('\n').filter(x=>x),
+        val: document.getElementById('b-val').value.trim().split('\n').filter(x=>x),
+      };
+    }
+    showMsg('busquedaMsg','¡Búsqueda actualizada!','success');
+  } else {
+    // Modo nuevo
+    busquedas.unshift({
+      id: Date.now(), puesto,
+      sub: document.getElementById('b-sub').value.trim(),
+      zona: document.getElementById('b-zona').value.trim(),
+      desc: document.getElementById('b-desc').value.trim(),
+      req: document.getElementById('b-req').value.trim().split('\n').filter(x=>x),
+      val: document.getElementById('b-val').value.trim().split('\n').filter(x=>x),
+      fecha: new Date().toLocaleDateString('es-PY',{day:'2-digit',month:'long',year:'numeric'})
+    });
+    showMsg('busquedaMsg','¡Búsqueda publicada!','success');
+  }
+  save('savia_busquedas',busquedas);
+  renderBusquedas(); renderAdminLists();
+  ['b-puesto','b-sub','b-zona','b-desc','b-req','b-val'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('b-editando').value='';
+  document.getElementById('b-submit-btn').textContent='+ Publicar búsqueda';
+  document.getElementById('b-cancel-btn').style.display='none';
+}
+function eliminarBusqueda(id){
+  id = Number(id);
+  if(!confirm('¿Eliminar esta búsqueda?')) return;
+  busquedas = busquedas.filter(b=>b.id!==id);
+  save('savia_busquedas',busquedas);
+  renderBusquedas(); renderAdminLists();
+}
+
+function editarBusqueda(id){
+  id = Number(id);
+  const b = busquedas.find(x=>x.id===id);
+  if(!b) return;
+  document.getElementById('b-puesto').value = b.puesto;
+  document.getElementById('b-sub').value = b.sub||'';
+  document.getElementById('b-zona').value = b.zona||'';
+  document.getElementById('b-desc').value = b.desc||'';
+  document.getElementById('b-req').value = (b.req||[]).join('\n');
+  document.getElementById('b-val').value = (b.val||[]).join('\n');
+  document.getElementById('b-editando').value = id;
+  document.getElementById('b-submit-btn').textContent = '✔ Guardar cambios';
+  document.querySelector('#tab-busquedas .admin-subtitle').scrollIntoView({behavior:'smooth'});
+}
+
+function cancelarEditBusqueda(){
+  ['b-puesto','b-sub','b-zona','b-desc','b-req','b-val'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('b-editando').value='';
+  document.getElementById('b-submit-btn').textContent='+ Publicar búsqueda';
+  document.getElementById('b-cancel-btn').style.display='none';
+}
+
+function renderBusquedas(){
+  const g = document.getElementById('busquedas-grid');
+  if(!busquedas.length){
+    g.innerHTML='<div class="no-busquedas"><span>🌱</span>No hay búsquedas activas en este momento.<br>Próximamente nuevas oportunidades.</div>';
+    return;
+  }
+  g.innerHTML = busquedas.map(b=>`
+    <div class="busqueda-card">
+      <div class="busqueda-card-header"><span class="busqueda-badge">Búsqueda laboral</span></div>
+      <div class="busqueda-card-body">
+        <div class="busqueda-puesto">${b.puesto}</div>
+        ${b.sub?`<div class="busqueda-sub">${b.sub}</div>`:''}
+        <div class="busqueda-meta">
+          ${b.zona?`<span class="busqueda-meta-item">📍 ${b.zona}</span>`:''}
+          <span class="busqueda-meta-item">📅 ${b.fecha}</span>
+        </div>
+        ${b.desc?`<div class="busqueda-desc">${b.desc}</div>`:''}
+        ${(b.req.length||b.val.length)?`
+        <div class="busqueda-cols">
+          ${b.req.length?`<div class="busqueda-col"><h5>Requisitos</h5><ul>${b.req.map(r=>`<li>${r}</li>`).join('')}</ul></div>`:''}
+          ${b.val.length?`<div class="busqueda-col"><h5>Se valora</h5><ul class="busqueda-valora">${b.val.map(v=>`<li>${v}</li>`).join('')}</ul></div>`:''}
+        </div>`:''}
+        <a href="mailto:saviagenteygestion@gmail.com?subject=Postulación: ${encodeURIComponent(b.puesto)}&body=Hola equipo SAVIA,%0D%0A%0D%0AMe postulo para el puesto: ${encodeURIComponent(b.puesto)}%0D%0A%0D%0AAdjunto mi CV.%0D%0A%0D%0AGracias!" class="btn-postular">Postularme — enviar CV →</a>
+      </div>
+    </div>`).join('');
+}
+
+function agregarNota(){
+  const titulo = document.getElementById('n-titulo').value.trim();
+  if(!titulo){ showMsg('blogMsg','El título es obligatorio','error'); return; }
+  const editId = Number(document.getElementById('n-editando').value);
+  if(editId){
+    const idx = notas.findIndex(n=>n.id===editId);
+    if(idx>-1){
+      notas[idx] = { ...notas[idx], titulo,
+        resumen: document.getElementById('n-resumen').value.trim(),
+        contenido: document.getElementById('n-contenido').value.trim(),
+        emoji: document.getElementById('n-emoji').value.trim()||'🌿',
+      };
+    }
+    showMsg('blogMsg','¡Nota actualizada!','success');
+  } else {
+    notas.unshift({
+      id: Date.now(), titulo,
+      resumen: document.getElementById('n-resumen').value.trim(),
+      contenido: document.getElementById('n-contenido').value.trim(),
+      emoji: document.getElementById('n-emoji').value.trim()||'🌿',
+      fecha: new Date().toLocaleDateString('es-PY',{day:'2-digit',month:'long',year:'numeric'})
+    });
+    showMsg('blogMsg','¡Nota publicada!','success');
+  }
+  save('savia_notas',notas);
+  renderBlog(); renderAdminLists();
+  ['n-titulo','n-resumen','n-contenido','n-emoji'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('n-editando').value='';
+  document.getElementById('n-submit-btn').textContent='+ Publicar nota';
+  document.getElementById('n-cancel-btn').style.display='none';
+}
+function eliminarNota(id){
+  id = Number(id);
+  if(!confirm('¿Eliminar esta nota?')) return;
+  notas = notas.filter(n=>n.id!==id);
+  save('savia_notas',notas);
+  renderBlog(); renderAdminLists();
+}
+function editarNota(id){
+  id = Number(id);
+  const n = notas.find(x=>x.id===id);
+  if(!n) return;
+  document.getElementById('n-titulo').value = n.titulo;
+  document.getElementById('n-resumen').value = n.resumen||'';
+  document.getElementById('n-contenido').value = n.contenido||'';
+  document.getElementById('n-emoji').value = n.emoji||'🌿';
+  document.getElementById('n-editando').value = id;
+  document.getElementById('n-submit-btn').textContent = '✔ Guardar cambios';
+  document.getElementById('n-cancel-btn').style.display='block';
+  document.querySelector('#tab-blog .admin-subtitle').scrollIntoView({behavior:'smooth'});
+}
+function cancelarEditNota(){
+  ['n-titulo','n-resumen','n-contenido','n-emoji'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('n-editando').value='';
+  document.getElementById('n-submit-btn').textContent='+ Publicar nota';
+  document.getElementById('n-cancel-btn').style.display='none';
+}
+function abrirNota(id){
+  const n = notas.find(x=>x.id===id);
+  if(!n) return;
+  document.getElementById('modal-fecha').textContent=n.fecha;
+  document.getElementById('modal-titulo').textContent=n.titulo;
+  document.getElementById('modal-body').textContent=n.contenido||n.resumen;
+  document.getElementById('notaModal').classList.add('open');
+}
+const colors=['c1','c2','c3'];
+function renderBlog(){
+  const g = document.getElementById('blog-grid');
+  if(!notas.length){
+    g.innerHTML='<div class="no-notas"><span>✍️</span>Las notas del blog aparecerán aquí.</div>';
+    return;
+  }
+  g.innerHTML=notas.map((n,i)=>`
+    <div class="blog-card">
+      <div class="blog-card-img ${colors[i%3]}">${n.emoji}</div>
+      <div class="blog-card-body">
+        <p class="blog-fecha">${n.fecha}</p>
+        <h3>${n.titulo}</h3>
+        ${n.resumen?`<p>${n.resumen}</p>`:''}
+        <a href="#" class="blog-leer" onclick="event.preventDefault();abrirNota(${n.id})">Leer más →</a>
+      </div>
+    </div>`).join('');
+}
+
+function renderAdminLists(){
+  document.getElementById('admin-busquedas-list').innerHTML = busquedas.length
+    ? busquedas.map(b=>`
+      <div class="admin-list-item">
+        <div><div class="admin-list-item-title">${b.puesto}</div><div class="admin-list-item-sub">${b.sub||''} ${b.zona?'· '+b.zona:''}</div></div>
+        <div style="display:flex;gap:0.4rem;flex-shrink:0">
+          <button class="admin-edit" onclick="editarBusqueda(${b.id});document.getElementById('b-cancel-btn').style.display='block'">Editar</button>
+          <button class="admin-delete" onclick="eliminarBusqueda(${b.id})">Eliminar</button>
+        </div>
+      </div>`).join('')
+    : '<p style="font-size:.82rem;color:var(--texto-suave);font-style:italic;padding:.8rem 0">Sin búsquedas publicadas</p>';
+  document.getElementById('admin-blog-list').innerHTML = notas.length
+    ? notas.map(n=>`
+      <div class="admin-list-item">
+        <div><div class="admin-list-item-title">${n.emoji} ${n.titulo}</div><div class="admin-list-item-sub">${n.fecha}</div></div>
+        <div style="display:flex;gap:0.4rem;flex-shrink:0">
+          <button class="admin-edit" onclick="editarNota(${n.id})">Editar</button>
+          <button class="admin-delete" onclick="eliminarNota(${n.id})">Eliminar</button>
+        </div>
+      </div>`).join('')
+    : '<p style="font-size:.82rem;color:var(--texto-suave);font-style:italic;padding:.8rem 0">Sin notas publicadas</p>';
+}
+
+function showMsg(id,txt,type){
+  const el=document.getElementById(id);
+  el.className='admin-msg '+type; el.textContent=txt;
+  setTimeout(()=>{el.className='admin-msg';},3000);
+}
+
+document.getElementById('adminOverlay').addEventListener('click',function(e){ if(e.target===this) closeAdmin(); });
+document.getElementById('notaModal').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('open'); });
+
+renderBusquedas(); renderBlog();
+</script>
 </body>
 </html>
