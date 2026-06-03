@@ -53,7 +53,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .btn-primary:hover{background:var(--terracota);color:white}
 .btn-outline{display:inline-block;border:1px solid rgba(245,240,232,0.38);color:rgba(245,240,232,0.8);padding:0.85rem 2.2rem;font-size:0.67rem;letter-spacing:0.25em;text-transform:uppercase;text-decoration:none;transition:all 0.3s}
 .btn-outline:hover{background:rgba(245,240,232,0.1)}
-.hero-right{background:var(--crema-oscuro);display:flex;align-items:center;justify-content:center;padding:4rem 3.5rem 4rem 5.5rem;position:relative;overflow:hidden}
+.hero-right{background:var(--crema-oscuro);display:flex;align-items:center;justify-content:center;padding:3rem 2.5rem;position:relative;overflow:hidden}
 /* SIN rayas de fondo */
 .hero-card{background:white;padding:2.8rem;border-left:3px solid var(--terracota);box-shadow:16px 16px 50px rgba(184,92,42,0.1);position:relative;z-index:1;animation:float 6s ease-in-out infinite;max-width:360px;width:100%}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
@@ -62,9 +62,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .hero-card h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--texto);margin-bottom:0.9rem;line-height:1.2}
 .hero-card p{font-size:0.84rem;line-height:1.8;color:var(--texto-suave)}
 .hero-tag{display:inline-block;background:var(--verde-suave);color:var(--texto);font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.32rem 0.85rem;margin-top:1.2rem}
-.hero-stats{display:flex;gap:2rem;margin-top:1.6rem;padding-top:1.6rem;border-top:1px solid rgba(26,46,26,0.08)}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;color:var(--terracota);display:block}
-.stat-label{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--texto-suave)}
+.hero-stats{display:flex;justify-content:space-between;gap:0;margin-top:1.6rem;padding-top:1.6rem;border-top:1px solid rgba(26,46,26,0.08)}
+.hero-stats>div{text-align:center;flex:1}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:var(--terracota);display:block;line-height:1}
+.stat-label{font-size:0.52rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--texto-suave);margin-top:0.3rem;display:block}
 
 /* ── SECTIONS ── */
 section{padding:5rem 4rem}
@@ -282,7 +283,8 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   .hero{grid-template-columns:1fr}
   .hero-left{padding:6rem 2rem 3rem}
   .hero-left::after{display:none}
-  .hero-right{padding:3rem 2rem}
+  .hero-right{padding:2.5rem 1.5rem}
+  .hero-card{max-width:100%}
   section{padding:3.5rem 1.5rem}
   .sep{padding:1.4rem 1.5rem}
   .proposito,.contacto{grid-template-columns:1fr;gap:2.5rem}
@@ -367,9 +369,9 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
       <p>Disminuimos conflictos, ordenamos estructuras, potenciamos personas y fortalecemos empresas.</p>
       <span class="hero-tag">Gestión Integral de Capital Humano</span>
       <div class="hero-stats">
-        <div><span class="stat-num">2</span><span class="stat-label">Países</span></div>
-        <div><span class="stat-num">5</span><span class="stat-label">Servicios</span></div>
-        <div><span class="stat-num">∞</span><span class="stat-label">Propósito</span></div>
+        <div><span class="stat-num">+15</span><span class="stat-label">Años de experiencia</span></div>
+        <div><span class="stat-num">6</span><span class="stat-label">Servicios</span></div>
+        <div><span class="stat-num">∞</span><span class="stat-label">Compromiso</span></div>
       </div>
     </div>
   </div>
