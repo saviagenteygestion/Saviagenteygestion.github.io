@@ -301,6 +301,29 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   .footer-top,.footer-bottom{flex-direction:column;text-align:center}
   .redes-section{padding:3rem 1.5rem}
 }
+
+/* ── QUIÉN ESTÁ DETRÁS ── */
+.quien{background:white;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.quien-foto{position:relative;overflow:hidden;min-height:520px}
+.quien-foto img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.quien-foto-overlay{position:absolute;inset:0;background:linear-gradient(to right, transparent 60%, white)}
+.quien-texto{padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center}
+.quien-texto .section-label{margin-bottom:0.6rem}
+.quien-texto .section-title{font-size:clamp(2rem,3vw,2.8rem);margin-bottom:1.5rem;color:var(--verde-oscuro)}
+.quien-nombre{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--terracota);margin-bottom:0.3rem}
+.quien-cargo{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--verde);margin-bottom:2rem}
+.quien-texto p{font-size:0.9rem;line-height:1.92;color:var(--texto-suave);margin-bottom:1rem}
+.quien-texto p:last-of-type{margin-bottom:0}
+.quien-texto p strong{color:var(--verde-oscuro);font-weight:500}
+.quien-detalle{display:flex;align-items:center;gap:0.8rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--verde-suave)}
+.quien-detalle-icon{width:40px;height:40px;background:var(--verde-suave);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.quien-detalle p{font-size:0.82rem;line-height:1.65;color:var(--texto-suave);margin:0}
+@media(max-width:900px){
+  .quien{grid-template-columns:1fr}
+  .quien-foto{min-height:380px}
+  .quien-foto-overlay{background:linear-gradient(to bottom, transparent 60%, white)}
+  .quien-texto{padding:3rem 1.5rem}
+}
 </style>
 </head>
 <body>
@@ -330,7 +353,7 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   <ul class="nav-links">
     <li><a href="#proposito">Propósito</a></li>
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#busquedas">Búsquedas</a></li>
+    <li><a href="#quien">Quiénes somos</a></li><li><a href="#busquedas">Búsquedas</a></li>
     <li><a href="#modalidades">Cómo trabajamos</a></li>
     <li><a href="#blog" id="nav-blog" style="display:none">Blog</a></li>
     <li><a href="#contacto">Contacto</a></li>
@@ -346,6 +369,7 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   <svg width="24" height="40" viewBox="0 0 80 130" fill="none" style="color:var(--terracota);opacity:0.5"><use href="#rama" stroke="currentColor"/></svg>
   <a href="#proposito" onclick="document.getElementById('mobileMenu').classList.remove('open')">Propósito</a>
   <a href="#servicios" onclick="document.getElementById('mobileMenu').classList.remove('open')">Servicios</a>
+  <a href="#quien" onclick="document.getElementById('mobileMenu').classList.remove('open')">Quiénes somos</a>
   <a href="#busquedas" onclick="document.getElementById('mobileMenu').classList.remove('open')">Búsquedas</a>
   <a href="#modalidades" onclick="document.getElementById('mobileMenu').classList.remove('open')">Cómo trabajamos</a>
   <a href="#blog" id="mobile-nav-blog" style="display:none" onclick="document.getElementById('mobileMenu').classList.remove('open')">Blog</a>
@@ -425,6 +449,28 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
 
   <div class="sep-line sep-right"></div>
 </div>
+
+
+<!-- QUIEN ESTA DETRAS -->
+<section class="quien" id="quien">
+  <div class="quien-foto">
+    <img src="ana-paula.jpg" alt="Ana Paula Scacciaferro — SAVIA">
+    <div class="quien-foto-overlay"></div>
+  </div>
+  <div class="quien-texto">
+    <p class="section-label">Quién está detrás de SAVIA</p>
+    <h2 class="section-title">Una mirada que integra lo legal, lo organizacional y lo humano</h2>
+    <div class="quien-nombre">Ana Paula Scacciaferro</div>
+    <div class="quien-cargo">Fundadora · Abogada · +16 años de experiencia</div>
+    <p>Su recorrido le permitió construir una mirada propia que integra lo legal, lo organizacional y lo humano. Porque gestionar personas no es solo ordenar procesos — es entender lo que pasa en cada equipo.</p>
+    <p>Cree en algo simple, pero esencial: <strong>las organizaciones crecen cuando las personas están bien.</strong></p>
+    <p>Y desde ahí acompaña a cada empresa, con cercanía, criterio y propósito.</p>
+    <div class="quien-detalle">
+      <div class="quien-detalle-icon">🧘</div>
+      <p>También es profesora de yoga — una práctica que atraviesa su forma de trabajar, promoviendo espacios más conscientes donde las personas puedan desarrollarse y confiar en sí mismas.</p>
+    </div>
+  </div>
+</section>
 
 <!-- BUSQUEDAS -->
 <section class="busquedas" id="busquedas">
@@ -571,7 +617,29 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
         <button class="admin-tab" onclick="switchTab(event,'config')">⚙ Config</button>
       </div>
       <div class="admin-body">
-        <!-- BUSQUEDAS -->
+        
+<!-- QUIEN ESTA DETRAS -->
+<section class="quien" id="quien">
+  <div class="quien-foto">
+    <img src="ana-paula.jpg" alt="Ana Paula Scacciaferro — SAVIA">
+    <div class="quien-foto-overlay"></div>
+  </div>
+  <div class="quien-texto">
+    <p class="section-label">Quién está detrás de SAVIA</p>
+    <h2 class="section-title">Una mirada que integra lo legal, lo organizacional y lo humano</h2>
+    <div class="quien-nombre">Ana Paula Scacciaferro</div>
+    <div class="quien-cargo">Fundadora · Abogada · +16 años de experiencia</div>
+    <p>Su recorrido le permitió construir una mirada propia que integra lo legal, lo organizacional y lo humano. Porque gestionar personas no es solo ordenar procesos — es entender lo que pasa en cada equipo.</p>
+    <p>Cree en algo simple, pero esencial: <strong>las organizaciones crecen cuando las personas están bien.</strong></p>
+    <p>Y desde ahí acompaña a cada empresa, con cercanía, criterio y propósito.</p>
+    <div class="quien-detalle">
+      <div class="quien-detalle-icon">🧘</div>
+      <p>También es profesora de yoga — una práctica que atraviesa su forma de trabajar, promoviendo espacios más conscientes donde las personas puedan desarrollarse y confiar en sí mismas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUSQUEDAS -->
         <div class="admin-section active" id="tab-busquedas">
           <div class="admin-subtitle">Nueva búsqueda</div>
           <div class="admin-msg" id="busquedaMsg"></div>
