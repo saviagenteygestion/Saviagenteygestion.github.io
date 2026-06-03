@@ -8,6 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
+  --azul-fondo:#eef3f6;
   --terracota:#b85c2a;
   --terracota-suave:#d4855a;
   --azul:#7b9baf;
@@ -69,6 +70,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 
 /* ── SECTIONS ── */
 section{padding:3.5rem 4rem}
+.sec-rama{display:flex;align-items:center;gap:1.2rem;margin-bottom:1rem}
+.sec-rama::before,.sec-rama::after{content:'';flex:1;height:1px;background:currentColor;opacity:0.2}
+.sec-rama svg{flex-shrink:0}
 .section-label{font-size:0.82rem;letter-spacing:0.28em;font-weight:500;text-transform:uppercase;color:var(--terracota);margin-bottom:0.7rem;display:flex;align-items:center;gap:1rem}
 .section-label::before{content:'';display:block;width:28px;height:1px;background:var(--terracota)}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,4.5vw,4.5rem);font-weight:400;line-height:1.1;color:var(--texto);margin-bottom:1.3rem}
@@ -79,10 +83,10 @@ section{padding:3.5rem 4rem}
 .sec-header .section-label{justify-content:center;margin-bottom:0.6rem}
 .sec-header .section-label::before{display:none}
 .sec-header .section-title{margin-bottom:0}
-.sec-leaf{margin-bottom:1rem}
+
 
 /* ── PROPOSITO ── */
-.proposito{background:white;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.proposito{background:var(--crema-blanco);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
 .proposito-texto p{font-size:0.9rem;line-height:1.9;color:var(--texto-suave);margin-bottom:1.1rem}
 .valores-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
 .valor-item{padding:1.8rem 1.6rem;background:var(--crema);border-bottom:3px solid var(--verde-suave);transition:all 0.35s;position:relative;overflow:hidden}
@@ -94,7 +98,7 @@ section{padding:3.5rem 4rem}
 .valor-item p{font-size:0.77rem;line-height:1.68;color:var(--texto-suave)}
 
 /* ── SERVICIOS ── */
-.servicios{background:var(--crema);text-align:center}
+.servicios{background:var(--crema);text-align:center;border-top:4px solid var(--azul-suave)}
 .servicios .section-label{justify-content:center}
 .servicios .section-label::before{display:none}
 .servicios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:3rem;text-align:left}
@@ -112,7 +116,7 @@ section{padding:3.5rem 4rem}
 .servicio-destacado .btn-primary:hover{background:var(--terracota);color:white}
 
 /* ── BUSQUEDAS ── */
-.busquedas{background:var(--crema-oscuro)}
+.busquedas{background:#eef3f6;border-top:4px solid var(--azul)}
 .busquedas-header{text-align:center;margin-bottom:3.5rem}
 .busquedas-header .section-label{justify-content:center}
 .busquedas-header .section-label::before{display:none}
@@ -150,7 +154,7 @@ section{padding:3.5rem 4rem}
 .modalidad-item li::before{content:'→';color:var(--terracota-suave);font-size:0.9rem;flex-shrink:0}
 
 /* ── BLOG (oculto por defecto, activable) ── */
-.blog{background:var(--crema);display:none}
+.blog{background:#eef3f6;display:none}
 .blog.visible{display:block}
 .blog-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:2rem}
@@ -185,7 +189,7 @@ section{padding:3.5rem 4rem}
 .redes-labels span{width:56px;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.5);text-align:center}
 
 /* ── CONTACTO ── */
-.contacto{background:var(--crema-oscuro);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.contacto{background:var(--crema-oscuro);border-top:4px solid var(--verde-suave);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .contacto .section-label{color:var(--verde-oscuro)}
 .contacto .section-label::before{background:var(--verde-oscuro)}
 .contacto .section-title{color:var(--texto)}
@@ -378,14 +382,12 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   </div>
 </section>
 
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--verde-suave);opacity:0.7"><use href="#rama" stroke="currentColor"/></svg>
-  <div class="sep-line sep-right"></div>
+    <div class="sep-line sep-right"></div>
 </div>
 
 <!-- PROPOSITO -->
 <section class="proposito" id="proposito">
   <div class="proposito-texto">
-    <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--verde);opacity:0.55;margin-bottom:0.8rem"><use href="#rama" stroke="currentColor"/></svg>
     <p class="section-label">Nuestro propósito</p>
     <h2 class="section-title">En SAVIA creemos que cada empresa crece desde adentro</h2>
     <p>Acompañamos a las empresas en cada etapa del vínculo con sus colaboradores: desde el ingreso y la organización de su documentación, hasta el seguimiento cercano de las dinámicas internas.</p>
@@ -400,13 +402,14 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   </div>
 </section>
 
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--terracota-suave);opacity:0.7"><use href="#rama" stroke="currentColor"/></svg>
-  <div class="sep-line sep-right"></div>
+    <div class="sep-line sep-right"></div>
 </div>
 
 <!-- SERVICIOS -->
 <section class="servicios" id="servicios">
-  <svg class="sec-leaf" width="44" height="72" viewBox="0 0 80 130" fill="none" style="color:var(--terracota);opacity:0.55"><use href="#rama" stroke="currentColor"/></svg>
+  <div class="sec-rama" style="color:var(--verde);max-width:320px;margin:0 auto 1rem">
+    <svg width="28" height="46" viewBox="0 0 80 130" fill="none"><use href="#rama" stroke="currentColor" stroke-width="1.2"/></svg>
+  </div>
   <p class="section-label">¿Qué hacemos?</p>
   <h2 class="section-title">Gestión integral<br>del capital humano</h2>
   <div class="servicios-grid">
@@ -420,14 +423,15 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   </div>
 </section>
 
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--verde);opacity:0.65"><use href="#rama" stroke="currentColor"/></svg>
   <div class="sep-line sep-right"></div>
 </div>
 
 <!-- BUSQUEDAS -->
 <section class="busquedas" id="busquedas">
   <div class="busquedas-header">
-    <svg class="sec-leaf" width="44" height="72" viewBox="0 0 80 130" fill="none" style="color:var(--verde);opacity:0.6"><use href="#rama" stroke="currentColor"/></svg>
+    <div class="sec-rama" style="color:var(--terracota);max-width:320px;margin:0 auto 1rem">
+      <svg width="28" height="46" viewBox="0 0 80 130" fill="none"><use href="#rama" stroke="currentColor" stroke-width="1.2"/></svg>
+    </div>
     <p class="section-label">Oportunidades laborales</p>
     <h2 class="section-title">Búsquedas<br>activas</h2>
     <p style="font-size:0.85rem;color:var(--texto-suave);max-width:460px;margin:0.8rem auto 0">Estas son las posiciones que estamos gestionando actualmente. Postulate enviando tu CV.</p>
@@ -435,8 +439,7 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   <div class="busquedas-grid" id="busquedas-grid"></div>
 </section>
 
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--azul-suave);opacity:0.7"><use href="#rama" stroke="currentColor"/></svg>
-  <div class="sep-line sep-right"></div>
+    <div class="sep-line sep-right"></div>
 </div>
 
 <!-- MODALIDADES -->
@@ -467,13 +470,14 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
 <!-- BLOG (oculto por defecto) -->
 <div class="sep bg-crema" id="sep-blog" style="display:none">
   <div class="sep-line sep-left"></div>
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--terracota-suave);opacity:0.7"><use href="#rama" stroke="currentColor"/></svg>
-  <div class="sep-line sep-right"></div>
+    <div class="sep-line sep-right"></div>
 </div>
 <section class="blog" id="blog">
   <div class="blog-header">
     <div>
-      <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--terracota);opacity:0.5;margin-bottom:0.8rem;display:block"><use href="#rama" stroke="currentColor"/></svg>
+      <div class="sec-rama" style="color:var(--terracota);margin-bottom:1rem">
+        <svg width="28" height="46" viewBox="0 0 80 130" fill="none"><use href="#rama" stroke="currentColor" stroke-width="1.2"/></svg>
+      </div>
       <p class="section-label">Novedades</p>
       <h2 class="section-title">Blog SAVIA</h2>
     </div>
@@ -484,7 +488,6 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
 <!-- REDES DESTACADAS -->
 <div class="sep bg-crema-oscuro">
   <div class="sep-line sep-left"></div>
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--verde);opacity:0.65"><use href="#rama" stroke="currentColor"/></svg>
   <div class="sep-line sep-right"></div>
 </div>
 
@@ -503,8 +506,7 @@ input:checked+.toggle-slider:before{transform:translateX(18px)}
   </div>
 </section>
 
-  <svg width="36" height="58" viewBox="0 0 80 130" fill="none" style="color:var(--verde-suave);opacity:0.7"><use href="#rama" stroke="currentColor"/></svg>
-  <div class="sep-line sep-right"></div>
+    <div class="sep-line sep-right"></div>
 </div>
 
 <!-- CONTACTO -->
